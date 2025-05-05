@@ -5,7 +5,12 @@ import sys
 
 
 def main():
+<<<<<<< HEAD
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ecommerce.settings')
+=======
+    """Run administrative tasks."""
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'videoconferencing.settings')
+>>>>>>> a51982a (first commit)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
