@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .views import save_recording
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,4 +16,12 @@ urlpatterns = [
     path('join_room/', views.join_room, name='join_room'),
     path('random_call/', views.random_call, name='random_call'),
     path('save-recording/', save_recording, name='save_recording'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='password_reset_confirm.html'
+    ), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='password_reset_done.html'
+    ), name='password_reset_complete'),
 ]
+

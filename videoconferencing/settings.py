@@ -114,5 +114,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'chakravarthy.atipamula@gmail.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'lprxdvopzgqvfcpo'  # Replace with your email's app password
+EMAIL_HOST_PASSWORD = 'mgqlrditwczgagug'  # Replace with your email's app password
 

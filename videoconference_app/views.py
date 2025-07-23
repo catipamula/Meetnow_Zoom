@@ -6,6 +6,28 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from django.contrib.auth.forms import PasswordResetForm
+from django.shortcuts import render
+from django.conf import settings
+
+def forgot_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save(
+                request=request,
+                use_https=request.is_secure(),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                email_template_name='password_reset_email.html',
+            )
+            return render(request, 'forgot_password.html', {
+                'success': 'If this email exists, a password reset link has been sent.'
+            })
+        else:
+            return render(request, 'forgot_password.html', {
+                'error': 'Enter a valid registered email.'
+            })
+    return render(request, 'forgot_password.html')
 
 import random
 
@@ -142,3 +164,4 @@ def save_recording(request):
       return Response({'message': 'Recording saved successfully'}, status=200)
       
   return Response({'error': 'File missing or incorrect method'}, status=400)
+

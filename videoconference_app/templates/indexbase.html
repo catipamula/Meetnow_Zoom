@@ -1,301 +1,548 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom </title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Helvetica', sans-serif;
-            line-height: 1.6;
-            background-color: #f1f1f1;
-            color: #333;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Header */
-        .header {
-            background-color: #1c1c1c;
-            padding: 20px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .header .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .header nav ul {
-            list-style-type: none;
-            display: flex;
-        }
-
-        .header nav ul li {
-            margin-left: 25px;
-        }
-
-        .header nav ul li a {
-            color: white;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .header nav ul li a:hover {
-            color: #00b8d4;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7), rgba(0, 188, 212, 0.7)), url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            padding: 150px 20px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 22px;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out 0.5s;
-        }
-
-        .cta-btn {
-            background-color: #00b8d4;
-            padding: 18px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            background-color: #008c96;
-            transform: scale(1.1);
-        }
-
-        /* Features Section */
-        .features {
-            background-color: #ffffff;
-            padding: 80px 20px;
-            text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .features h2 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .feature-item {
-            margin-bottom: 50px;
-            display: inline-block;
-            width: 30%;
-            text-align: center;
-            animation: fadeInUp 1s ease-out 0.5s;
-        }
-
-        .feature-item .feature-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        .feature-item h3 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .feature-item p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        /* About Section */
-        .about {
-            background-color: #f9f9f9;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .about h2 {
-            font-size: 36px;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        .about p {
-            font-size: 18px;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #1c1c1c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer a {
-            color: #00b8d4;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .cta-btn {
-                padding: 14px 30px;
-                font-size: 18px;
-            }
-
-            .features {
-                padding: 60px 20px;
-            }
-
-            .feature-item {
-                width: 100%;
-                margin-bottom: 40px;
-            }
-
-            .about {
-                padding: 60px 20px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom </title>
+  <!-- Favicon Link -->
+  <link rel="shortcut icon" href="https://st1.zoom.us/homepage/publish/zoom.ico">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <!-- FontAwesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f6f8fa;
+      scroll-behavior: smooth;
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 8px rgba(11,137,226,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 70px;
+      transition: background 0.3s;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0b89e2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-image {
+      margin-left: 0;
+      vertical-align: middle;
+      height: 38px;
+      width: 110px;
+      object-fit: contain;
+      background: transparent;
+      border-radius: 8px;
+      box-shadow: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: #0b89e2;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover {
+      color: #1565c0;
+    }
+    .hero {
+      background: linear-gradient(120deg, #0b89e2 0%, #6dd5ed 100%);
+      color: #fff;
+      padding: 100px 0 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 120px;
+      background: url('https://www.transparenttextures.com/patterns/wavecut.png');
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 650px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      animation: fadeInDown 1.2s cubic-bezier(.39,.575,.56,1.000);
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 32px;
+      color: #e3f2fd;
+    }
+    .cta-btn {
+      background-color: #fff;
+      color: #0b89e2;
+      padding: 18px 35px;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 20px;
+      box-shadow: 0 4px 16px rgba(11,137,226,0.08);
+    }
+    .cta-btn.secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      margin-left: 18px;
+    }
+    .cta-btn:hover {
+      background-color: #0b89e2;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      padding: 60px 0 30px 0;
+      background: #fff;
+      animation: fadeInUp 1.2s 0.2s cubic-bezier(.39,.575,.56,1.000) both;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .feature-item {
+      background: #f6f8fa;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(11,137,226,0.07);
+      padding: 36px 24px 32px 24px;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeInUp 1s cubic-bezier(.39,.575,.56,1.000);
+    }
+    .feature-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(11,137,226,0.13);
+    }
+    .feature-icon {
+      font-size: 44px;
+      margin-bottom: 16px;
+      color: #0b89e2;
+      transition: color 0.2s;
+    }
+    .feature-item:hover .feature-icon {
+      color: #1565c0;
+    }
+    .about {
+      background: #eaf6fd;
+      padding: 60px 0 40px 0;
+      text-align: center;
+      animation: fadeInUp 1.2s 0.3s cubic-bezier(.39,.575,.56,1.000) both;
+    }
+    .about-img {
+      width: 120px;
+      margin: 20px auto 0 auto;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(11,137,226,0.13);
+    }
+    .about-steps {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .about-step {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(11,137,226,0.07);
+      padding: 24px 18px;
+      width: 220px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .about-step .fa {
+      font-size: 32px;
+      color: #0b89e2;
+      margin-bottom: 10px;
+    }
+    .testimonials {
+      background: #fff;
+      padding: 60px 0 40px 0;
+      text-align: center;
+      animation: fadeInUp 1.2s 0.4s cubic-bezier(.39,.575,.56,1.000) both;
+    }
+    .testimonials-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: #0b89e2;
+    }
+    .testimonial-list {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .testimonial {
+      background: #eaf6fd;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(11,137,226,0.07);
+      padding: 28px 22px;
+      width: 300px;
+      margin-bottom: 18px;
+      text-align: left;
+      position: relative;
+    }
+    .testimonial .fa-quote-left {
+      color: #0b89e2;
+      font-size: 1.3rem;
+      margin-right: 8px;
+    }
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      margin-top: 18px;
+      gap: 10px;
+      text-align: left;
+    }
+    .testimonial-user img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #0b89e2;
+      box-shadow: 0 2px 8px rgba(11,137,226,0.13);
+    }
+    .testimonial-user span {
+      font-weight: 600;
+      color: #0b89e2;
+      font-size: 1.1rem;
+    }
+    .testimonial-user small {
+      color: #555;
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+    .testimonial-text {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      color: #222;
+      font-style: italic;
+    }
+    footer {
+      background: #0b89e2;
+      color: #fff;
+      text-align: center;
+      padding: 32px 0 16px 0;
+      position: relative;
+    }
+    .footer-social {
+      margin: 18px 0 0 0;
+    }
+    .footer-social a {
+      color: #fff;
+      margin: 0 12px;
+      font-size: 26px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: #ffe082;
+    }
+    .footer-links {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+    .footer-links a {
+      color: #ffe082;
+      margin: 0 8px;
+      text-decoration: underline;
+    }
+    .copyright {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      color: #e3f2fd;
+    }
+    .trusted-by {
+      background: #f6f8fa;
+      padding: 36px 0 24px 0;
+      text-align: center;
+      animation: fadeInUp 1.2s 0.25s cubic-bezier(.39,.575,.56,1.000) both;
+    }
+    .trusted-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0b89e2;
+      margin-bottom: 18px;
+    }
+    .trusted-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 38px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      filter: grayscale(1) brightness(0.7);
+      opacity: 0.7;
+      transition: filter 0.3s, opacity 0.3s, transform 0.3s;
+      animation: brandFadeIn 1.2s cubic-bezier(.39,.575,.56,1.000);
+    }
+    .brand-logo:hover {
+      filter: none;
+      opacity: 1;
+      transform: scale(1.08) rotate(-2deg);
+    }
+    @keyframes brandFadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 0.7; transform: translateY(0); }
+    }
+    @media (max-width: 900px) {
+      .features, .testimonial-list, .about-steps {
+        flex-direction: column;
+        align-items: center;
+      }
+      .feature-item, .testimonial, .about-step {
+        width: 90%;
+        margin-bottom: 20px;
+      }
+      .header {
+        flex-direction: column;
+        height: auto;
+        padding: 0 10px;
+      }
+      nav ul {
+        gap: 16px;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-content {
+        padding: 0 10px;
+      }
+      .about-steps, .testimonial-list {
+        gap: 18px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="logo">Zoom </div>
-        <nav>
-            <ul>
-                <li><a href="{% url 'login' %}">Signin</a></li>
-                <li><a href="{% url 'register' %}">Signup</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg" alt="Zoom Logo" class="logo-image" height="38" width="110" style="background:transparent; border-radius:8px; box-shadow:none;">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'login' %}">Signin</a></li>
+        <li><a href="{% url 'register' %}">Signup</a></li>
+        <li><a href="{% url 'features' %}">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Zoom video call </h1>
-            <p>Seamless virtual meetings and conferences, anytime, anywhere.</p>
-            <button class="cta-btn">Start a Meeting</button>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Welcome to Zoom video call</h1>
+      <div class="hero-subtitle">Seamless virtual meetings and conferences, anytime, anywhere.<br>Connect, collaborate, and create with ease.</div>
+      <a href="{% url 'login' %}" class="cta-btn">Start a Meeting</a>
+      <a href="#features" class="cta-btn secondary">Learn More</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Key Features</h2>
+    <div class="feature-item" style="animation-delay:0.1s;">
+      <div class="feature-icon"><i class="fa-solid fa-video"></i></div>
+      <h3>High-Quality Video</h3>
+      <p>Enjoy crystal-clear video calls with your colleagues, friends, and family.</p>
+    </div>
+    <div class="feature-item" style="animation-delay:0.2s;">
+      <div class="feature-icon"><i class="fa-solid fa-desktop"></i></div>
+      <h3>Screen Sharing</h3>
+      <p>Share your screen with participants to enhance collaboration.</p>
+    </div>
+    <div class="feature-item" style="animation-delay:0.3s;">
+      <div class="feature-icon"><i class="fa-solid fa-record-vinyl"></i></div>
+      <h3>Recording</h3>
+      <p>Record meetings for future reference and share them with attendees.</p>
+    </div>
+    <div class="feature-item" style="animation-delay:0.4s;">
+      <div class="feature-icon"><i class="fa-solid fa-lock"></i></div>
+      <h3>Secure & Private</h3>
+      <p>Meetings are encrypted and privacy is our top priority.</p>
+    </div>
+  </section>
+
+  <!-- Trusted by Section -->
+  <section class="trusted-by">
+    <div class="trusted-title">Trusted by Leading Brands</div>
+    <div class="trusted-logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="brand-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png" alt="Apple" class="brand-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="brand-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="brand-logo">
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonials-title">What Our Users Say</div>
+    <div class="testimonial-list">
+      <div class="testimonial">
+        <i class="fa fa-quote-left"></i>
+        <div class="testimonial-text">Zoom Clone made remote work so much easier and more productive!</div>
+        <div class="testimonial-user">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John D.">
+          <div>
+            <span>John D.</span><br>
+            <small>Product Manager, Microsoft</small>
+          </div>
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <h2>Key Features</h2>
-        <div class="feature-item">
-            <div class="feature-icon">📞</div>
-            <h3>High-Quality Video</h3>
-            <p>Enjoy crystal-clear video calls with your colleagues, friends, and family.</p>
+      </div>
+      <div class="testimonial">
+        <i class="fa fa-quote-left"></i>
+        <div class="testimonial-text">The video quality and screen sharing are top-notch. Highly recommended!</div>
+        <div class="testimonial-user">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya S.">
+          <div>
+            <span>Priya S.</span><br>
+            <small>Team Lead, Google</small>
+          </div>
         </div>
-        <div class="feature-item">
-            <div class="feature-icon">💻</div>
-            <h3>Screen Sharing</h3>
-            <p>Share your screen with participants to enhance collaboration.</p>
+      </div>
+      <div class="testimonial">
+        <i class="fa fa-quote-left"></i>
+        <div class="testimonial-text">Secure, reliable, and easy to use. Perfect for our team meetings.</div>
+        <div class="testimonial-user">
+          <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Alex T.">
+          <div>
+            <span>Alex T.</span><br>
+            <small>CTO, Netflix</small>
+          </div>
         </div>
-        <div class="feature-item">
-            <div class="feature-icon">🎥</div>
-            <h3>Recording</h3>
-            <p>Record meetings for future reference and share them with attendees.</p>
-        </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Zoom Clone</h2>
-        <p>This is a clone of the Zoom application, providing features for video conferencing, screen sharing, and more.
-            Stay connected with anyone, anywhere in the world.</p>
-    </section>
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Zoom Clone</h2>
+    <p>This is a clone of the Zoom application, providing features for video conferencing, screen sharing, and more.
+      Stay connected with anyone, anywhere in the world.</p>
+    <img src="https://cdn-icons-png.flaticon.com/512/747/747545.png" alt="About Zoom Clone" class="about-img">
+    <div class="about-steps">
+      <div class="about-step">
+        <i class="fa fa-user-plus"></i>
+        <div>Sign up or Sign in</div>
+      </div>
+      <div class="about-step">
+        <i class="fa fa-calendar-check"></i>
+        <div>Schedule or Join a Meeting</div>
+      </div>
+      <div class="about-step">
+        <i class="fa fa-video"></i>
+        <div>Start Video Conferencing</div>
+      </div>
+      <div class="about-step">
+        <i class="fa fa-share-square"></i>
+        <div>Share Screen & Collaborate</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer Section -->
-    <footer id="contact">
-        <p>Contact us at <a href="mailto:contact@zoomclone.com">contact@Datavalley.Ai</a></p>
-    </footer>
+  <!-- Footer Section -->
+  <footer id="contact">
+    <p>Contact us at <a href="mailto:contact@zoomclone.com" style="color:#ffe082;">contact@Datavalley.Ai</a></p>
+    <div class="footer-social">
+      <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+    <div class="footer-links">
+      <a href="#features">Features</a>|
+      <a href="#about">About</a>|
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+    <div class="copyright">
+      &copy; 2024 Zoom Clone. All rights reserved.
+    </div>
+  </footer>
 
-    <script>
-        // Adding interactivity for button hover effect or other animations
-        document.querySelector('.cta-btn').addEventListener('mouseenter', function () {
-            this.style.transform = 'scale(1.1)';
-        });
+  <script>
+    // Adding interactivity for button hover effect or other animations
+    document.querySelector('.cta-btn').addEventListener('mouseenter', function () {
+      this.style.transform = 'scale(1.1)';
+    });
 
-        document.querySelector('.cta-btn').addEventListener('mouseleave', function () {
-            this.style.transform = 'scale(1)';
-        });
-    </script>
+    document.querySelector('.cta-btn').addEventListener('mouseleave', function () {
+      this.style.transform = 'scale(1)';
+    });
+    // Animate feature items on scroll
+    const featureItems = document.querySelectorAll('.feature-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.2 });
+    featureItems.forEach((item, idx) => {
+      item.style.opacity = 0;
+      item.style.transform = 'translateY(40px)';
+      observer.observe(item);
+    });
+  </script>
 </body>
 
 </html>

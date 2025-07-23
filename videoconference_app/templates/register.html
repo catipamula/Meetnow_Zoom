@@ -2,58 +2,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signup Form</title>
   <link rel="shortcut icon" href="https://st1.zoom.us/homepage/publish/zoom.ico">
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+   /* Base Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #145DFF, #2D8CFF);
+  overflow: hidden;
+  position: relative;
+  background-image: url("https://cdn.pixabay.com/photo/2022/08/18/19/00/water-7395510_1280.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+}
+
+/* Background Image Overlay */
+.background-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  filter: brightness(0.4) blur(6px);
+  z-index: -1;
+}
+
+/* Wrapper */
+.form-wrapper {
+  width: 100%;
+  max-width: 370px; /* reduced width */
+  padding: 10px;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+  text-align: center;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Zoom Logo */
+.zoom-logo {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+}
+
+/* Header */
+.form-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+/* Form Inputs */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.signup-form input {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.signup-form input::placeholder {
+  color: #d0d0d0;
+}
+
+.signup-form input:focus {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 4px rgba(45, 140, 255, 0.5);
+  border-color: rgba(45, 140, 255, 0.4);
+}
+
+/* Submit Button */
+.btn-signup {
+  padding: 10px;
+  background-color: #2D8CFF;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 8px rgba(45, 140, 255, 0.2);
+}
+
+.btn-signup:hover {
+  background-color: #145DFF;
+  transform: scale(1.03);
+}
+
+/* Error Message */
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+/* Redirect Text */
+.redirect-msg {
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  color: #e5e5e5;
+}
+
+.redirect-msg a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.redirect-msg a:hover {
+  color: #aad8ff;
+}
+
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1e1e2f, #0077b6); color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <div class="container" style="width: 90%; max-width: 450px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;">
-    <div class="registration form" style="padding: 2rem;">
-      <header style="font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 1.5rem; color: #333;">Signup</header>
-      <form action="{% url 'register' %}" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+<body>
+  <div class="background-img"></div>
+  <div class="form-wrapper">
+    <div class="glass-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg" alt="Zoom Logo" class="zoom-logo"  />
+      <h2 class="form-title">Signup</h2>
+      <form method="POST" action="{% url 'register' %}" class="signup-form">
         {% csrf_token %}
-        <input type="text" name="first_name" placeholder="Enter your first name" style="height: 50px; font-size: 1rem; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; color: #333; outline: none; transition: all 0.3s;">
-        <input type="text" name="last_name" placeholder="Enter your last name" style="height: 50px; font-size: 1rem; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; color: #333; outline: none; transition: all 0.3s;">
-        <input type="text" name="email" placeholder="Enter your email" style="height: 45px; font-size: 1rem; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; color: #333; outline: none; transition: all 0.3s;">
-        <input type="password" name="password1" placeholder="Create a password" style="height: 45px; font-size: 1rem; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; color: #333; outline: none; transition: all 0.3s;">
-        <input type="password" name="password2" placeholder="Confirm your password" style="height: 50px; font-size: 1rem; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; color: #333; outline: none; transition: all 0.3s;">
-        <input type="submit" class="button" value="Signup" style="height: 50px; font-size: 1rem; font-weight: 500; color: #fff; background: #009579; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; transform: scale(1); box-shadow: 0 4px 6px rgba(0, 149, 121, 0.3);">
-        <center>
-          {% if error %}
-          <p style="color: red; font-size: 0.9rem;">{{ error }}</p>
-          {% endif %}
-        </center>
+        <input type="text" name="first_name" placeholder="Enter your first name" required>
+        <input type="text" name="last_name" placeholder="Enter your last name" required>
+        <input type="text" name="email" placeholder="Enter your email" required>
+        <input type="password" name="password1" placeholder="Create a password" required>
+        <input type="password" name="password2" placeholder="Confirm your password" required>
+        <input type="submit" value="Signup" class="btn-signup">
+        {% if error %}
+          <p class="error-msg">{{ error }}</p>
+        {% endif %}
       </form>
-      <div class="signup" style="margin-top: 1rem; text-align: center;">
-        <span style="font-size: 0.9rem; color: #666;">Already have an account? 
-          <a href="{% url 'login' %}" style="color: #009579; text-decoration: none; transition: color 0.3s;">Signin</a>
-        </span>
-      </div>
+      <p class="redirect-msg">
+        Already have an account?
+        <a href="{% url 'login' %}">Signin</a>
+      </p>
     </div>
   </div>
-
-  <style>
-    input:focus {
-      border-color: #009579 !important;
-      box-shadow: 0 0 5px rgba(0, 149, 121, 0.8);
-    }
-
-    input.button:hover {
-      background: #006653;
-      transform: scale(1.05);
-    }
-
-    .container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    }
-
-    a:hover {
-      color: #006653;
-      text-decoration: underline;
-    }
-  </style>
 </body>
 </html>

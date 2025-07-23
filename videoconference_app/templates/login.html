@@ -2,48 +2,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login Form</title>
-  <link rel="shortcut icon" href="https://st1.zoom.us/homepage/publish/zoom.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Zoom Clone</title>
+  <link rel="shortcut icon" href="https://st1.zoom.us/homepage/publish/zoom.ico" />
+  <!-- <link rel="stylesheet" href="{% static 'css/login.css' %}" /> -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #145DFF, #2D8CFF);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1470&q=80");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+}
+
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+}
+
+.zoom-logo img {
+  height: 48px;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.login-form input[type="text"]::placeholder,
+.login-form input[type="password"]::placeholder {
+  color: #e0e0e0;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 6px rgba(45, 140, 255, 0.8);
+}
+
+.btn-login {
+  padding: 10px;
+  background-color: #2D8CFF;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-login:hover {
+  background-color: #145DFF;
+  transform: scale(1.05);
+}
+
+.success-msg {
+  color: #00ff88;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #eeeeee;
+}
+
+.signup-link a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+  color: #aad8ff;
+}
+
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1e1e2f, #0077b6); color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-  <div class="container" style="max-width: 450px; width: 90%; background: #fff; border-radius: 10px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s, box-shadow 0.3s;">
-    <div class="login form" style="padding: 2rem;">
-      <header style="font-size: 2rem; font-weight: 600; text-align: center; margin-bottom: 1.5rem; color: #333;">Login</header>
-      <form action="{% url 'login' %}" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
+<body>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="zoom-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg" alt="Zoom Logo" />
+      </div>
+      <h2 class="login-title">Login</h2>
+      <form action="{% url 'login' %}" method="POST" class="login-form">
         {% csrf_token %}
-        <input type="text" placeholder="Enter your email" name="email" 
-          style="height: 40px; width: 99%; padding: 0 5px; font-size: 16px; border: 1px solid #ddd; border-radius: 6px; background: #f8f8f8; color: #333; outline: none; transition: border-color 0.3s, box-shadow 0.3s; cursor: text; align-self: center;" 
-          onfocus="this.style.borderColor='#0077b6'; this.style.boxShadow='0 0 5px rgba(0, 119, 182, 0.8)';" 
-          onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';">
-        <input type="password" placeholder="Enter your password" name="password" 
-          style="height: 40px; width: 100%; padding: 0 5px; font-size: 16px; border: 1px solid #ddd; border-radius: 6px; background: #f8f8f8; color: #333; outline: none; transition: border-color 0.3s, box-shadow 0.3s; cursor: text;" 
-          onfocus="this.style.borderColor='#0077b6'; this.style.boxShadow='0 0 5px rgba(0, 119, 182, 0.8)';" 
-          onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';">
-        <input type="submit" class="button" value="Login" 
-          style="height: 40px; background: #0077b6; color: #fff; font-size: 1rem; font-weight: 500; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s, transform 0.3s;" 
-          onmouseover="this.style.background='#005f8a'; this.style.transform='scale(1.05)';" 
-          onmouseout="this.style.background='#0077b6'; this.style.transform='scale(1)';">
-        <center>
-          {% if success %}
-          <p style="color: green; font-size: 1rem; font-weight: bold;">{{ success }}</p>
-          {% endif %}
-          {% if error %}
-          <p style="color: red; font-size: 1rem;">{{ error }}</p>
-          {% endif %}
-        </center>
+        <input type="text" name="email" placeholder="Enter your email" required />
+        <input type="password" name="password" placeholder="Enter your password" required />
+        <div style="text-align: right; margin-bottom: 0.5rem;">
+          <a href="{% url 'forgot_password' %}" style="color: #aad8ff; font-size: 0.95rem; text-decoration: underline;">Forgot Password?</a>
+        </div>
+        <input type="submit" value="Login" class="btn-login" />
+
+        {% if success %}
+        <p class="success-msg">{{ success }}</p>
+        {% endif %}
+        {% if error %}
+        <p class="error-msg">{{ error }}</p>
+        {% endif %}
       </form>
-      <div class="signup" style="text-align: center; margin-top: 1rem; font-size: 16px;">
-        <span>Don't have an account? 
-          <a href="{% url 'register' %}" 
-            style="color: #0077b6; text-decoration: none; transition: color 0.3s;" 
-            onmouseover="this.style.color='#005f8a'; this.style.textDecoration='underline';" 
-            onmouseout="this.style.color='#0077b6'; this.style.textDecoration='none';">
-            Signup
-          </a>
-        </span>
+      <div class="signup-link">
+        Don't have an account?
+        <a href="{% url 'register' %}">Signup</a>
       </div>
     </div>
   </div>
