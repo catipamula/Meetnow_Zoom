@@ -59,6 +59,7 @@ class RandomCallConsumer(AsyncWebsocketConsumer):
             'leave': True,
             'message': message
         }))
+<<<<<<< HEAD
 
 // Same variables like in the earlier example:
 // - `localStream`: your local media stream (obtained from WebRTC)
@@ -134,3 +135,5 @@ document.getElementById('startRecordingBtn').addEventListener('click', () => {
     
 });
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2

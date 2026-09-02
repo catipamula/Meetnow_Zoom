@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+<<<<<<< HEAD
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.contrib.auth.forms import PasswordResetForm
@@ -29,10 +30,13 @@ def forgot_password(request):
             })
     return render(request, 'forgot_password.html')
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 import random
 
 active_rooms = {}  # Global dictionary to keep track of active rooms and their participant counts
 
+<<<<<<< HEAD
 def features(request):
     return render(request, 'features.html')
 from django.http import JsonResponse
@@ -63,6 +67,8 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 def index(request):
     return render(request, 'index.html')
 
@@ -137,6 +143,7 @@ def random_call(request):
             del active_rooms[roomID]
     
     return redirect("/meeting?roomID=" + roomID)
+<<<<<<< HEAD
 
 # Django views.py (e.g., in a video_app/views.py)
 from rest_framework.decorators import api_view, parser_classes
@@ -165,3 +172,5 @@ def save_recording(request):
       
   return Response({'error': 'File missing or incorrect method'}, status=400)
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2

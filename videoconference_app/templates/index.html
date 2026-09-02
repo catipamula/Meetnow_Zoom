@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 {% load static %}
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title>Zoom</title>
   <link rel="shortcut icon" href="https://st1.zoom.us/homepage/publish/zoom.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -832,3 +836,95 @@ if (newsletter) {
   </script>
 </body>
 </html>
+=======
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Video Conference</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #0077b6);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .intro {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .intro:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .intro h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #e3f2fd;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .intro h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #b2dfdb;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #4caf50;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .button:hover {
+      background-color: #388e3c;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro">
+    <h1>Welcome to my Awesome Video Conferencing App!</h1>
+    <h2>For all your professional and personal needs!</h2>
+    <!-- create a signup and signin button-->
+    <a href="{% url 'login' %}" class="button">Sign In</a>
+    <a href="{% url 'register' %}" class="button">Sign Up</a>
+  </div>
+</body>
+</html>
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2

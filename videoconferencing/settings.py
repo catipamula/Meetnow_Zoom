@@ -23,7 +23,10 @@ CHANNEL_LAYERS = {
 }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -98,14 +101,21 @@ USE_I18N = True
 
 USE_TZ = True
 
+<<<<<<< HEAD
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "videoconference_app/static"),
 ]
+=======
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+<<<<<<< HEAD
 
 # settings.py
 
@@ -116,3 +126,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'chakravarthy.atipamula@gmail.com'  # Replace with your email address
 EMAIL_HOST_PASSWORD = 'mgqlrditwczgagug'  # Replace with your email's app password
 
+=======
+>>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
