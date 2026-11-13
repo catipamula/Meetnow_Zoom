@@ -39,7 +39,7 @@ class RandomCallConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': data['message']
+                'message': data.get('message', '')
             }
         )
 
@@ -59,81 +59,3 @@ class RandomCallConsumer(AsyncWebsocketConsumer):
             'leave': True,
             'message': message
         }))
-<<<<<<< HEAD
-
-// Same variables like in the earlier example:
-// - `localStream`: your local media stream (obtained from WebRTC)
-// - `peerConnections`: a map of PeerConnection objects by their user ID
-
-let mediaRecorder;
-let recordedChunks = [];
-let isRecording = false;
-
-// Function to initiate recording
-async function startRecording() {
-    recordedChunks = [];
-  // Create a MediaRecorder
-    mediaRecorder = new MediaRecorder(localStream, {
-    mimeType: 'video/webm;codecs=vp9,opus' // Or 'video/mp4;codecs=avc1,mp4a' etc
-  });
-    
-  // Event handler to append data
-    mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-            recordedChunks.push(event.data);
-        }
-    }
-
-  mediaRecorder.onstop = async() => {
-        console.log('Recording stopped')
-
-       let blob = new Blob(recordedChunks, { type: 'video/webm' })
-       const fileName = `recording-${Date.now()}.webm`;
-        const file = new File([blob],fileName,{type:"video/webm"})
-
-        const formData = new FormData()
-        formData.append("file", file)
-
-
-        try {
-             const res = await fetch('/save-recording/', {  // Update this url
-            method: 'POST',
-           body: formData
-            });
-
-             if(res.ok){
-               console.log("recording uploaded successfully");
-            }
-            
-        } catch (e) {
-             console.log(e);
-        }
-
-  }
-    mediaRecorder.start();
-    isRecording = true;
-    console.log('Recording started');
-
-}
-
-// Function to stop recording
-function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state === "recording") {
-        mediaRecorder.stop();
-        isRecording = false;
-        console.log('Stopping recording');
-    }
-}
-
-// Example UI button event handler
-document.getElementById('startRecordingBtn').addEventListener('click', () => {
-  if(isRecording){
-      stopRecording();
-  }else{
-    startRecording();
-  }
-    
-});
-
-=======
->>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2

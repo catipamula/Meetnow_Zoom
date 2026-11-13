@@ -1,15 +1,20 @@
+import os
+import random
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-<<<<<<< HEAD
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
 from django.contrib.auth.forms import PasswordResetForm
-from django.shortcuts import render
 from django.conf import settings
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser
+from .forms import RegisterForm
+
+active_rooms = {}  # Global dictionary to keep track of active rooms and their participant counts
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -18,7 +23,7 @@ def forgot_password(request):
             form.save(
                 request=request,
                 use_https=request.is_secure(),
-                from_email=settings.DEFAULT_FROM_EMAIL,
+                from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', None),
                 email_template_name='password_reset_email.html',
             )
             return render(request, 'forgot_password.html', {
@@ -30,16 +35,8 @@ def forgot_password(request):
             })
     return render(request, 'forgot_password.html')
 
-=======
->>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
-import random
-
-active_rooms = {}  # Global dictionary to keep track of active rooms and their participant counts
-
-<<<<<<< HEAD
 def features(request):
     return render(request, 'features.html')
-from django.http import JsonResponse
 
 def contact(request):
     if request.method == 'POST':
@@ -47,17 +44,17 @@ def contact(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        # Construct the email content
         subject = f"New Contact Message from {name}"
         body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
 
         try:
-            # Send the email
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', getattr(settings, 'EMAIL_HOST_USER', 'your_email@gmail.com'))
+            recipient_email = getattr(settings, 'EMAIL_HOST_USER', 'chakravarthy.atipamula@gmail.com')
             send_mail(
                 subject,
                 body,
-                'your_email@gmail.com',  # Replace with your email
-                ['chakravarthy.atipamula@gmail.com'],  # Replace with the recipient email
+                from_email,
+                [recipient_email],
                 fail_silently=False,
             )
             return JsonResponse({'status': 'success', 'message': 'Message sent successfully!'})
@@ -66,9 +63,6 @@ def contact(request):
     
     return render(request, 'contact.html')
 
-
-=======
->>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
 def index(request):
     return render(request, 'index.html')
 
@@ -107,7 +101,8 @@ def dashboard(request):
 
 @login_required
 def videocall(request):
-    return render(request, 'videocall.html', {'name': request.user.first_name + " " + request.user.last_name})
+    full_name = f"{request.user.first_name} {request.user.last_name}".strip()
+    return render(request, 'videocall.html', {'name': full_name or request.user.username})
 
 @login_required
 def logout_view(request):
@@ -117,8 +112,8 @@ def logout_view(request):
 @login_required
 def join_room(request):
     if request.method == 'POST':
-        roomID = request.POST['roomID']
-        return redirect("/meeting?roomID=" + roomID)
+        roomID = request.POST.get('roomID', '').strip()
+        return redirect(f"/meeting?roomID={roomID}")
     return render(request, 'joinroom.html')
 
 @login_required
@@ -127,7 +122,7 @@ def random_call(request):
 
     # Find a room with less than 2 participants
     roomID = None
-    for room, count in active_rooms.items():
+    for room, count in list(active_rooms.items()):
         if count < 2:
             roomID = room
             active_rooms[room] += 1
@@ -139,38 +134,26 @@ def random_call(request):
         active_rooms[roomID] = 1
     else:
         # Remove the room from active_rooms if it reaches 2 participants
-        if active_rooms[roomID] >= 2:
+        if active_rooms.get(roomID, 0) >= 2:
             del active_rooms[roomID]
     
-    return redirect("/meeting?roomID=" + roomID)
-<<<<<<< HEAD
-
-# Django views.py (e.g., in a video_app/views.py)
-from rest_framework.decorators import api_view, parser_classes
-from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser
-import os
-
+    return redirect(f"/meeting?roomID={roomID}")
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def save_recording(request):
-  if request.method == 'POST' and request.FILES.get('file'):
-      recording_file = request.FILES['file']
+    if request.method == 'POST' and request.FILES.get('file'):
+        recording_file = request.FILES['file']
 
-      # Define the upload directory based on your setup
-      upload_dir = 'media/recordings'  
-      os.makedirs(upload_dir, exist_ok=True) # Make sure the dir exist
+        upload_dir = os.path.join(settings.BASE_DIR, 'media', 'recordings')
+        os.makedirs(upload_dir, exist_ok=True)
 
-      file_path = os.path.join(upload_dir, recording_file.name)
-      
-      with open(file_path, 'wb+') as destination:
-           for chunk in recording_file.chunks():
-              destination.write(chunk)
-          
-      return Response({'message': 'Recording saved successfully'}, status=200)
-      
-  return Response({'error': 'File missing or incorrect method'}, status=400)
-
-=======
->>>>>>> eb2277fa704e6eef21fa833c13714f22305496f2
+        file_path = os.path.join(upload_dir, recording_file.name)
+        
+        with open(file_path, 'wb+') as destination:
+            for chunk in recording_file.chunks():
+                destination.write(chunk)
+            
+        return Response({'message': 'Recording saved successfully'}, status=200)
+        
+    return Response({'error': 'File missing or incorrect method'}, status=400)
